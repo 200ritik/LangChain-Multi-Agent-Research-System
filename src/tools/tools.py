@@ -58,7 +58,7 @@ def scrape_url(url: str) -> str:
 
         response.raise_for_status()
 
-        html = response.text
+        html = response.text  # fetch the info as the string
 
         # ──────────────────────────────────────────────────
         # Strategy 1 → trafilatura (BEST for articles/blogs)
