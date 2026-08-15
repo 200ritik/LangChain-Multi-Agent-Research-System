@@ -1,14 +1,21 @@
 from langchain.agents import create_agent
-from langchain_openai import ChatOpenAI
-from langchain_core.prompt_values import ChatPromptValue
-from langchain_core.output_parsers import StrOutputParser  #llm use it to convert that text in plane format so the user can understand
-from src.tools.tools import web_search, scrape_url
-from dotenv import load_dotenv
+from langchain_google_genai import ChatGoogleGenerativeAI
+from langchain_core.output_parsers import StrOutputParser
 from langchain_core.prompts import ChatPromptTemplate
 
-load_dotenv
+from src.tools.tools import web_search, scrape_url
 
-llm = ChatOpenAI(model = "gpt-40-mini", tempeature=0)
+import os
+from dotenv import load_dotenv
+
+load_dotenv(override=True)
+
+llm = ChatGoogleGenerativeAI(
+    model="gemini-3.5-flash-lite",
+    temperature=0,
+    google_api_key=os.getenv("GEMINI_API_KEY"),
+)
+
 
 # ------1st agent--------
 def build_search_agent():
